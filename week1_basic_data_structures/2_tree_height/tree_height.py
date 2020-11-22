@@ -1,7 +1,29 @@
 # python3
 
-import sys
+import sys, os
 import threading
+
+
+# TODO run all test files
+# def test_files():
+#     os.chdir('./tests')
+#     for f in os.listdir():
+#         file_name, f_ext = os.path.splitext(f)
+#         file = open(f,"r")
+#         if f_ext != ".a":
+#             input_text = file.read().strip()
+#             mismatch = find_mismatch(input_text)
+#         else:
+#             output_text = file.read().strip()
+#             # print(input_text)
+#             # print(mismatch)
+#             # print(output_text)
+#             if "Success" in output_text and "Success" in mismatch: #both give success
+#                 print(f, "pass")
+#             elif str(output_text) == str(mismatch[0]): #both give same answer
+#                 print(f, "pass")
+#             else:
+#                 print(f, 'wrong answer!') #something is wrong
 
 
 class Node:
@@ -25,8 +47,9 @@ class Node:
         return ls
 
 
-def compute_height(n, parents):
+def compute_height_naive(n, parents):
     # Replace this code with a faster implementation
+    """Naive implementation of the height of a Tree using only parents definition for the nodes"""
     max_height = 0
     for vertex in range(n):
         height = 0
@@ -39,6 +62,7 @@ def compute_height(n, parents):
 
 
 def LevelTraversal(root, nodes):
+    """Print all nodes moving through the levels using BFS"""
     if root is None:
         return []
     BFS_queue = [root]
@@ -65,13 +89,11 @@ def Height(nodes):
 def main():
     n = int(input("give number of nodes: \n"))
     parents = list(map(int, input("give list of nodes: \n").split()))
-    print('height-naive= ', compute_height(n, parents))
+    print('height-naive= ', compute_height_naive(n, parents))
     nodes = []  # this is the actual Tree; a list of Nodes
     root = None
-    # n = 5
     for i in range(n):
         nodes.append(Node(number=i))
-    # parents = [-1, 0, 4, 0, 3]
     for child_index in range(n):
         parent_index = parents[child_index]
         if parent_index == -1:
@@ -79,17 +101,8 @@ def main():
         else:
             nodes[parent_index].add_child(nodes[child_index])
 
-    # for i in range(n):
-    #     ls = nodes[i].list_children_numbers()
-    #     print('i, ls= ', i, ls)
-
-    # make a BFS queue
-    # put root on queue first
-    # dequeue first element of queue and put all children on the queue
-    # this will traverse through the queue layer by layer.
-
     print('nodes using LevelTraversal= ', LevelTraversal(root, nodes))
-    print('height-using recursion= ', Height(nodes))
+    print('height-using recursion= ', Height([nodes[root]]))  # the tree is defined using the starting Node
 
 
 # In Python, the default limit on recursion depth is rather low,
