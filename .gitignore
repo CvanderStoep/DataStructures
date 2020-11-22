@@ -2,6 +2,7 @@
 **/tests/
 *.cpp
 *.java
+*.log
 
 /venv/
 
