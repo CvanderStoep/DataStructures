@@ -4,33 +4,39 @@ import sys, os
 import threading
 
 
-# TODO run all test files
-# def test_files():
-#     os.chdir('./tests')
-#     for f in os.listdir():
-#         file_name, f_ext = os.path.splitext(f)
-#         file = open(f,"r")
-#         if f_ext != ".a":
-#             input_text = file.read().strip()
-#             mismatch = find_mismatch(input_text)
-#         else:
-#             output_text = file.read().strip()
-#             # print(input_text)
-#             # print(mismatch)
-#             # print(output_text)
-#             if "Success" in output_text and "Success" in mismatch: #both give success
-#                 print(f, "pass")
-#             elif str(output_text) == str(mismatch[0]): #both give same answer
-#                 print(f, "pass")
-#             else:
-#                 print(f, 'wrong answer!') #something is wrong
+def test_files():
+    """"This routine runs all the test files in the test directory"""
+    os.chdir('./tests')
+    for f in os.listdir():
+        file_name, f_ext = os.path.splitext(f)
+        file = open(f, "r")
+        if f_ext != ".a":
+            n = int(file.readline())
+            input_text = file.readline()  # .strip()
+            parents = list(map(int, input_text.split()))
+            computed_height_naive = compute_height_naive(n, parents)
+            print(f, 'height naive= ', computed_height_naive)
+
+            root, nodes = convert_parent_child(n, parents)
+            computed_height_recursion = Height([nodes[root]])
+            print(f, 'height using recursion= ',
+                  computed_height_recursion)
+            computed_height_level_traversal = LevelTraversal(root, nodes)
+            print(f, 'height using level traversal= ',
+                  computed_height_level_traversal)
+
+        else:
+            output_height = int(file.readline())
+            print(f, computed_height_naive, computed_height_recursion,computed_height_level_traversal , output_height)
+            if not (computed_height_naive == output_height == computed_height_recursion == computed_height_level_traversal):
+                print(f, 'wrong answer!')  # something is wrong
 
 
 class Node:
-    def __init__(self, number=None, parent=None, children=None):
-        self.parent = parent
+    def __init__(self, number=None, children=None, level=1):
         self.children = []
         self.number = number
+        self.level = level
         if children is not None:
             for child in children:
                 self.add_child(child)
@@ -67,29 +73,26 @@ def LevelTraversal(root, nodes):
         return []
     BFS_queue = [root]
     all_nodes = []
+    max_height = 0
     while len(BFS_queue) != 0:
-        node = BFS_queue.pop(0)
-        all_nodes.append(node)
-        ls = nodes[node].list_children_numbers()
-        if len(ls) != 0:
-            for child in ls:
-                BFS_queue.append(child)
-    return all_nodes
+        node_number = BFS_queue.pop(0)
+        all_nodes.append(node_number)
+        list_children_nodes = nodes[node_number].children
+        if len(list_children_nodes) != 0:
+            for child in list_children_nodes:
+                BFS_queue.append(child.number)
+                child.level = nodes[node_number].level + 1
+                max_height = max(child.level, max_height)
+    return max_height #, all_nodes
 
 
 def Height(nodes):
     if len(nodes) == 0:
         return 0
-    max_height = 0
-    for node in nodes:
-        max_height = max(max_height, Height(node.children))
-    return 1 + max_height
+    return 1 + max(Height(node.children) for node in nodes)
 
 
-def main():
-    n = int(input("give number of nodes: \n"))
-    parents = list(map(int, input("give list of nodes: \n").split()))
-    print('height-naive= ', compute_height_naive(n, parents))
+def convert_parent_child(n, parents):
     nodes = []  # this is the actual Tree; a list of Nodes
     root = None
     for i in range(n):
@@ -100,9 +103,22 @@ def main():
             root = child_index
         else:
             nodes[parent_index].add_child(nodes[child_index])
+    return root, nodes
 
-    print('nodes using LevelTraversal= ', LevelTraversal(root, nodes))
-    print('height-using recursion= ', Height([nodes[root]]))  # the tree is defined using the starting Node
+
+def main():
+    test_files()
+    #  read input, string of parents per node
+    n = int(input("give number of nodes: \n"))
+    parents = list(map(int, input("give list of nodes: \n").split()))
+
+    # print('height-naive= ', compute_height_naive(n, parents))
+
+    #  input string denotes all parents, need to transform this to children
+    root, nodes = convert_parent_child(n, parents)
+
+    print('height using LevelTraversal (BFS)= ', LevelTraversal(root, nodes))
+    print('height using recursion (DFS)= ', Height([nodes[root]]))  # the tree is defined using the starting Node
 
 
 # In Python, the default limit on recursion depth is rather low,

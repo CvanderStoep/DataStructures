@@ -12,6 +12,5 @@ class TestCheckBrackets(unittest.TestCase):
         self.assertEqual(check_brackets.find_mismatch('[[]}]{}'), (4, False))
         self.assertEqual(check_brackets.find_mismatch('foo(bar[i);'), (10, False))
 
-
 if __name__ == '__main__':
     unittest.main()

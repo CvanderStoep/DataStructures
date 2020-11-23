@@ -39,6 +39,8 @@ def find_mismatch(text):
 #TODO output only number iso tuple (i, false)
 #TODO convert below into a unit test
 def test_files():
+    """"This routine runs all the test files in the test directory"""
+
     os.chdir('./tests')
     for f in os.listdir():
         file_name, f_ext = os.path.splitext(f)
