@@ -37,7 +37,7 @@ def process_requests(requests, buffer):
     teller = 0
     for request in requests:
         teller += 1
-        if teller % 1000 == 0: print('teller: ', teller)
+        # if teller % 1000 == 0: print('teller: ', teller)
         responses.append(buffer.process(request))
     return responses
 
