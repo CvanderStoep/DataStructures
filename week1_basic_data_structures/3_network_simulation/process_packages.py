@@ -21,7 +21,8 @@ class Buffer:
 
         # remove all elements that are smaller than the new request
         # only clear the buffer when you have to
-        if len(self.finish_time) > self.size - 2:
+        # this will make sure test 22 runs as well within reasonable time
+        if len(self.finish_time) > self.size - 1:
             self.finish_time = [time for time in self.finish_time if time > request.arrived_at]
 
         if len(self.finish_time) < self.size:
@@ -37,15 +38,11 @@ def process_requests(requests, buffer):
     teller = 0
     for request in requests:
         teller += 1
-        # if teller % 1000 == 0: print('teller: ', teller)
         responses.append(buffer.process(request))
     return responses
 
 
 def main():
-    # TODO run all files in test directory
-    # write output naar file.b
-    # use filecmp.cmp(file.a, file.b) to check if they are equal
     buffer_size, n_requests = map(int, input("buffer size, number of packets:\n").split())
     requests = []
     for _ in range(n_requests):
