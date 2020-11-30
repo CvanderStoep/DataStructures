@@ -35,9 +35,7 @@ class Buffer:
 
 def process_requests(requests, buffer):
     responses = []
-    teller = 0
     for request in requests:
-        teller += 1
         responses.append(buffer.process(request))
     return responses
 
