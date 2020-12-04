@@ -1,10 +1,10 @@
-import StackWithMax
+from StackWithMax import StackWithMax
 
 
 class Queue:
     def __init__(self):
-        self.s1 = StackWithMax.StackWithMax()
-        self.s2 = StackWithMax.StackWithMax()
+        self.s1 = StackWithMax()
+        self.s2 = StackWithMax()
 
     # EnQueue item to the queue
     def enQueue(self, x):
@@ -36,7 +36,6 @@ class Queue:
 
 
 if __name__ == '__main__':
-    # q = CreatingQueueWithTwoStacks()
     q = Queue()
     q.enQueue(5)
     q.enQueue(2)
