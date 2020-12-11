@@ -214,6 +214,7 @@ class Min_Heap:
 
 
 def main():
+    print('building first maxHeap ...')
     maxH = Max_Heap()
     maxH.Insert(3)
     maxH.Insert(29)
@@ -226,12 +227,14 @@ def main():
     maxH.Insert(13)
     print(maxH.array)
 
+    print('building second maxHeap ...')
     maxH2 = Max_Heap()
     maxH2.BuildHeap([3, 29, 40, 14, 7, 18, 49, 11, 57])
     print(maxH2.array)
     maxH2.ChangePriority(0, 1)
     print(maxH2.array)
 
+    print('building third maxHeap ...')
     maxH3 = Max_Heap()
     array = []
     for i in range(10):
@@ -239,15 +242,16 @@ def main():
     maxH3.BuildHeap(array)
     print(maxH3.array)
 
-    minH2 = Min_Heap()
-    minH2.BuildHeap([3, 29, 40, 14, 7, 18, 49, 11, 57])
-    print(minH2.array)
-    minH2.ChangePriority(0, 9)
-    print(minH2.array)
-    print(minH2.ExtractMin())
-    print(minH2.array)
+    print('building first minHeap ...')
+    minH1 = Min_Heap()
+    minH1.BuildHeap([3, 29, 40, 14, 7, 18, 49, 11, 57])
+    print(minH1.array)
+    minH1.ChangePriority(0, 9)
+    print(minH1.array)
+    print(minH1.ExtractMin())
+    print(minH1.array)
 
-    print('building minHeap ...')
+    print('building second minHeap ...')
     minHeap = Min_Heap()
     print('swaps: ', minHeap.BuildHeap([7, 8, 3, 1, 5, 4, 3, 2, 1]))
     print(minHeap.array)
