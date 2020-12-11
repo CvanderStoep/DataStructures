@@ -1,7 +1,9 @@
 # python3
+import Heap
+import os
 
 
-def build_heap(data):
+def build_heap_naive(data):
     """Build a heap from ``data`` inplace.
 
     Returns a sequence of swaps performed by the algorithm.
@@ -11,7 +13,7 @@ def build_heap(data):
     # of swaps. This turns the given array into a heap, but in the worst
     # case gives a quadratic number of swaps.
     #
-    # TODO: replace by a more efficient implementation
+    # DONE: replace by a more efficient implementation
     swaps = []
     for i in range(len(data)):
         for j in range(i + 1, len(data)):
@@ -25,12 +27,26 @@ def main():
     n = int(input())
     data = list(map(int, input().split()))
     assert len(data) == n
+    data2 = list(data)
 
-    swaps = build_heap(data)
+    swaps = build_heap_naive(data)
 
     print(len(swaps))
     for i, j in swaps:
         print(i, j)
+
+    print('building minHeap . . .')
+    minHeap = Heap.Min_Heap()
+    swaps = minHeap.BuildHeap(data2)
+
+    print(len(swaps))
+    for i, j in swaps:
+        print(i, j)
+
+    with open("output.txt", "w") as f:
+        print(len(swaps), file=f)
+        for i, j in swaps:
+            print(i, j, file=f)
 
 
 if __name__ == "__main__":
