@@ -7,7 +7,7 @@ AssignedJob = namedtuple("AssignedJob", ["worker", "started_at"])
 
 
 def assign_jobs_naive(n_workers, jobs):
-    # DONE: replace this code with a faster algorithm.
+    # DONE: replace this code with a faster algorithm, see below
     result = []
     next_free_time = [0] * n_workers
     for job in jobs:
@@ -18,6 +18,7 @@ def assign_jobs_naive(n_workers, jobs):
     return result
 
 
+# Carlo van der Stoep's code
 def assign_jobs(n_workers, jobs):
     result = []
 
