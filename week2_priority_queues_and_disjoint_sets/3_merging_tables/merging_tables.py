@@ -31,12 +31,11 @@ class Database:
 def test_run():
     with open("./tests/02", "r") as f:
         n_tables, n_queries = map(int, f.readline().split())
-        print('a: ', n_tables, n_queries)
+        print('test run results, output in map ./tests')
         counts = list(map(int, f.readline().split()))
-        db = Set.Set(counts)
-        # print('b: ', counts)
+        db = Set.Special_Set(counts)
 
-        with open("./tests/output.txt", "w") as g:
+        with open("./tests/02.b", "w") as g:
             for i in range(n_queries):
                 dst, src = map(int, f.readline().split())
                 # print('c: ', dst, src)
@@ -48,7 +47,7 @@ def main():
     n_tables, n_queries = map(int, input('give input: \n').split())
     counts = list(map(int, input().split()))
     assert len(counts) == n_tables
-    database = Set.Set(counts)
+    database = Set.Special_Set(counts)
 
     # test files and examples all are 1-index based; convert to 0-index base.
     for i in range(n_queries):
