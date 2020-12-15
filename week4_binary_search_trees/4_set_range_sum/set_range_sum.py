@@ -14,15 +14,15 @@ def update(v):
     return
   v.sum = v.key + (v.left.sum if v.left != None else 0) + (v.right.sum if v.right != None else 0)
   if v.left != None:
-    v.left.parents = v
+    v.left.parent = v
   if v.right != None:
-    v.right.parents = v
+    v.right.parent = v
 
 def smallRotation(v):
-  parent = v.parents
+  parent = v.parent
   if parent == None:
     return
-  grandparent = v.parents.parents
+  grandparent = v.parent.parent
   if parent.left == v:
     m = v.right
     v.right = parent
@@ -33,7 +33,7 @@ def smallRotation(v):
     parent.right = m
   update(parent)
   update(v)
-  v.parents = grandparent
+  v.parent = grandparent
   if grandparent != None:
     if grandparent.left == parent:
       grandparent.left = v
@@ -41,13 +41,13 @@ def smallRotation(v):
       grandparent.right = v
 
 def bigRotation(v):
-  if v.parents.left == v and v.parents.parents.left == v.parents:
+  if v.parent.left == v and v.parent.parent.left == v.parent:
     # Zig-zig
-    smallRotation(v.parents)
+    smallRotation(v.parent)
     smallRotation(v)
-  elif v.parents.right == v and v.parents.parents.right == v.parents:
+  elif v.parent.right == v and v.parent.parent.right == v.parent:
     # Zig-zig
-    smallRotation(v.parents)
+    smallRotation(v.parent)
     smallRotation(v)    
   else: 
     # Zig-zag
@@ -59,8 +59,8 @@ def bigRotation(v):
 def splay(v):
   if v == None:
     return None
-  while v.parents != None:
-    if v.parents.parents == None:
+  while v.parent != None:
+    if v.parent.parent == None:
       smallRotation(v)
       break
     bigRotation(v)
@@ -99,7 +99,7 @@ def split(root, key):
   left = right.left
   right.left = None
   if left != None:
-    left.parents = None
+    left.parent = None
   update(left)
   update(right)
   return (left, right)
