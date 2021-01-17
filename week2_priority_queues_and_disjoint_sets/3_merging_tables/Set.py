@@ -25,17 +25,8 @@ class Set:
             return
         if self.ranks[i_id] > self.ranks[j_id]:
             self.parents[j_id] = i_id
-
-            # self.row_counts[i_id] += self.row_counts[j_id]
-            # self.row_counts[j_id] = 0
-            # self.max_row_count = max(self.max_row_count, self.row_counts[i_id])
         else:
             self.parents[i_id] = j_id
-
-            # self.row_counts[j_id] += self.row_counts[i_id]
-            # self.row_counts[i_id] = 0
-            # self.max_row_count = max(self.max_row_count, self.row_counts[j_id])
-
             if self.ranks[i_id] == self.ranks[j_id]:
                 self.ranks[j_id] += 1
 
@@ -57,6 +48,7 @@ class Special_Set(Set):
         if self.ranks[i_id] > self.ranks[j_id]:
             self.parents[j_id] = i_id
 
+            #this part below is new compared to default Set.Union
             self.row_counts[i_id] += self.row_counts[j_id]
             self.row_counts[j_id] = 0
             self.max_row_count = max(self.max_row_count, self.row_counts[i_id])
