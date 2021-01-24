@@ -4,6 +4,7 @@ import sys
 
 
 def precomputehash(S, m1 = 10 ** 9 + 7, m2 = 10 ** 9 + 9, x = 263):
+    # TODO precompute hash with only m1, x as input
     n = len(S)
     h1 = [0] * (n + 1)
     h2 = [0] * (n + 1)
@@ -14,6 +15,7 @@ def precomputehash(S, m1 = 10 ** 9 + 7, m2 = 10 ** 9 + 9, x = 263):
     # print(h1, h2)
     return h1, h2, m1, m2, x
 
+# TODO write function Hash with input precompute hash
 
 class Solver:
     def __init__(self, s):
