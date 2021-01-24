@@ -27,11 +27,11 @@ if __name__ == '__main__':
         n = len(s)
         Hsk = [0] * (n - k + 1)
         for i in range(0, n - k + 1):
-            Hsk[i] = hs1[i + k] % m1 - (x ** k * hs1[i]) % m1
+            Hsk[i] = (hs1[i + k] % m1 - (x ** k * hs1[i]) % m1) % m1
 
         n = len(t)
         for i in range(0, n - k + 1):
-            Htk = ht1[i + k] % m1 - (x ** k * ht1[i]) % m1
+            Htk = (ht1[i + k] % m1 - (x ** k * ht1[i]) % m1) % m1
             if Htk in Hsk:
                 print('gevonden op plekken: ', Hsk.index(Htk), i, k)
                 print(t[i:i + k])
