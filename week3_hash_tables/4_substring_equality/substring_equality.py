@@ -3,11 +3,8 @@
 import sys
 
 
-def precomputehash(S):
+def precomputehash(S, m1 = 10 ** 9 + 7, m2 = 10 ** 9 + 9, x = 263):
     n = len(S)
-    m1 = 10 ** 9 + 7
-    m2 = 10 ** 9 + 9
-    x = 263
     h1 = [0] * (n + 1)
     h2 = [0] * (n + 1)
     for i in range(1, n + 1):
@@ -15,8 +12,7 @@ def precomputehash(S):
         h1[i] = (x * h1[i - 1] + ord(S[i - 1])) % m1
         h2[i] = (x * h2[i - 1] + ord(S[i - 1])) % m2
     # print(h1, h2)
-    return h1, h2
-
+    return h1, h2, m1, m2, x
 
 
 class Solver:
@@ -29,11 +25,11 @@ class Solver:
 
 if __name__ == '__main__':
     s = sys.stdin.readline()
-    h1, h2 = precomputehash(s)
+    h1, h2, m1, m2, x = precomputehash(s)
     # TODO m1, m2, x verwijderen
-    m1 = 10 ** 9 + 7
-    m2 = 10 ** 9 + 9
-    x = 263
+    # m1 = 10 ** 9 + 7
+    # m2 = 10 ** 9 + 9
+    # x = 263
 
     q = int(sys.stdin.readline())
     solver = Solver(s)
@@ -46,4 +42,3 @@ if __name__ == '__main__':
         # print(H1a, H1b, H2a, H2b)
         print("Yes" if solver.ask(a, b, l) else "No")
         print("Yes2" if H1a == H1b and H2a == H2b else "No2")
-
