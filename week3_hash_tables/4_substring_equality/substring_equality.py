@@ -18,6 +18,7 @@ def precomputehash(S):
     return h1, h2
 
 
+
 class Solver:
     def __init__(self, s):
         self.s = s
@@ -45,3 +46,4 @@ if __name__ == '__main__':
         # print(H1a, H1b, H2a, H2b)
         print("Yes" if solver.ask(a, b, l) else "No")
         print("Yes2" if H1a == H1b and H2a == H2b else "No2")
+
