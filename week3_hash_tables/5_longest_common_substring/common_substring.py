@@ -37,6 +37,7 @@ if __name__ == '__main__':
     m2 = 10 ** 9 + 9
     x = 263
     found = False
+    # TODO compute h1, h2 only once, not inside the loop
     for k in range(min(len(s), len(t)), 0, -1):
         n = len(s)
         h1, h2 = precomputehash(s)
