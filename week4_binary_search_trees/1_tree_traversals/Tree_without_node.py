@@ -23,19 +23,19 @@ class Tree:
                 print("Value is already existing in Tree.")
 
     def print_tree(self):
-        #  in-order traversal, returns sorted elements of the BST
         result = []
 
-        def in_order_traversal(node):
-            #  helper function for the recursion
-            if node.value is not None:
-                if node.left_child is not None:
-                    in_order_traversal(node.left_child)
-                result.append(node.value)
-                if node.right_child is not None:
-                    in_order_traversal(node.right_child)
+        if self.value is None:
+            return []
 
-        in_order_traversal(self)
+        if self.left_child is not None:
+            result += self.left_child.print_tree()
+
+        result += [self.value]
+
+        if self.right_child is not None:
+            result += self.right_child.print_tree()
+
         return result
 
 
