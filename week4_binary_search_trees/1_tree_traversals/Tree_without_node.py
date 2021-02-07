@@ -1,4 +1,5 @@
 class Tree:
+    #  definition of a BST without the use of a separate Node class
     def __init__(self, value=None):
         self.value = value
         self.left_child = None
@@ -23,6 +24,7 @@ class Tree:
                 print("Value is already existing in Tree.")
 
     def print_tree(self):
+        #  returns a list of values using in-order Traversal
         result = []
 
         if self.value is None:
