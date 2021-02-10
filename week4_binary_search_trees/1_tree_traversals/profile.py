@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 from pycallgraph import PyCallGraph
 from pycallgraph.output import GraphvizOutput
 
