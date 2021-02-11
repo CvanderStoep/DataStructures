@@ -17,16 +17,18 @@ def IsBinarySearchTree(tree):
         left.append(tree[i][1])
         right.append(tree[i][2])
 
-    # TODO return min_integer / max_integer for empty nodes
+    # DONE return min_integer / max_integer for empty nodes
     int_max, int_min = 2147483647, -2147483648
 
     def max_node(node):
+        #  returns the maximum value of a node (and all it children)
         if node == -1:
             return int_min
         else:
             return max(key[node], max_node(left[node]), max_node(right[node]))
 
     def min_node(node):
+        #  returns the minimum value of a node (and all it children)
         if node == -1:
             return int_max
         else:
@@ -34,21 +36,10 @@ def IsBinarySearchTree(tree):
 
     isBST = True
     for node in range(n):
-        if left[node] == -1 and right[node] == -1:
-            #  empty node
+        if max_node(left[node]) < key[node] <= min_node(right[node]):
             pass
-        elif left[node] == -1 and right[node] != -1:
-            #  only right node
-            if min_node(right[node]) < key[node]:
-                isBST = False
-        elif right[node] == -1 and left[node] != -1:
-            #  only left node
-            if max_node(left[node]) >= key[node]:
-                isBST = False
-        elif left[node] != -1 and right[node] != -1:
-            #  left + right node
-            if min_node(right[node]) < key[node] or max_node(left[node]) >= key[node]:
-                isBST = False
+        else:
+            isBST = False
     return isBST
 
 
