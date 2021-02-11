@@ -17,23 +17,20 @@ def IsBinarySearchTree(tree):
         left.append(tree[i][1])
         right.append(tree[i][2])
 
+    # TODO return min_integer / max_integer for empty nodes
+    int_max, int_min = 2147483647, -2147483648
+
     def max_node(node):
-        if left[node] == -1 and right[node] == -1:
-            return key[node]
-        if left[node] == -1:
-            return max(key[node], max_node(right[node]))
-        if right[node] == -1:
-            return max(key[node], max_node(left[node]))
-        return max(key[node], max_node(left[node]), max_node(right[node]))
+        if node == -1:
+            return int_min
+        else:
+            return max(key[node], max_node(left[node]), max_node(right[node]))
 
     def min_node(node):
-        if left[node] == -1 and right[node] == -1:
-            return key[node]
-        if left[node] == -1:
-            return min(key[node], min_node(right[node]))
-        if right[node] == -1:
-            return min(key[node], min_node(left[node]))
-        return min(key[node], min_node(left[node]), min_node(right[node]))
+        if node == -1:
+            return int_max
+        else:
+            return min(key[node], min_node(left[node]), min_node(right[node]))
 
     isBST = True
     for node in range(n):
@@ -66,22 +63,7 @@ def main():
         print("INCORRECT")
 
 
-# def IsBinarySearchTree(j, mn, mx):
-#     if not j in tree: return True
-#     if tree[j][0] < mn or tree[j][0] > mx: return False
-#     return IsBinarySearchTree(tree[j][1], mn, tree[j][0] - 1) and IsBinarySearchTree(tree[j][2], tree[j][0], mx)
-#
-#
-# def main():
-#     nodes = int(sys.stdin.readline().strip())
-#     global tree
-#     tree, int_max, int_min = {}, 2147483647, -2147483648
-#     for i in range(nodes):
-#         tree[i] = (list(map(int, sys.stdin.readline().strip().split())))
-#     if IsBinarySearchTree(0, int_min, int_max):
-#         print("CORRECT")
-#     else:
-#         print("INCORRECT")
+if __name__ == "__main__":
+    # main()
 
-
-threading.Thread(target=main).start()
+    threading.Thread(target=main).start()
