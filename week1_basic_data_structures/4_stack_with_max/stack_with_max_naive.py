@@ -51,7 +51,6 @@ class StackWithMax():
         return self.__maxstack[-1]
 
 
-# TODO write stress-test with randomized input
 # stacknaive and stack should give same output
 
 if __name__ == '__main__':

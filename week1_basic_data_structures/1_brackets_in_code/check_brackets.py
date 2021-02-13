@@ -36,15 +36,14 @@ def find_mismatch(text):
         top_of_stack_char, top_of_stack_pos = opening_brackets_stack.pop()
         return top_of_stack_pos + 1, False
 
-#TODO output only number iso tuple (i, false)
-#TODO convert below into a unit test
+
 def test_files():
     """"This routine runs all the test files in the test directory"""
 
     os.chdir('./tests')
     for f in os.listdir():
         file_name, f_ext = os.path.splitext(f)
-        file = open(f,"r")
+        file = open(f, "r")
         if f_ext != ".a":
             # print(f)
             input_text = file.read().strip()
@@ -54,12 +53,13 @@ def test_files():
             # print(input_text)
             # print(mismatch)
             # print(output_text)
-            if "Success" in output_text and "Success" in mismatch: #both give success
+            if "Success" in output_text and "Success" in mismatch:  # both give success
                 print(f, "pass")
-            elif str(output_text) == str(mismatch[0]): #both give same answer
+            elif str(output_text) == str(mismatch[0]):  # both give same answer
                 print(f, "pass")
             else:
-                print(f, 'wrong answer!') #something is wrong
+                print(f, 'wrong answer!')  # something is wrong
+
 
 def main():
     test_files()
