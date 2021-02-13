@@ -153,9 +153,10 @@ def erase(x):
 
 def search(x):
     global root
-    # DONE Implement find yourself
-    result, _ = find(root=root, key=x)
-    return False if result is None else True
+    result, root = find(root, x)
+    if result is None or result.key != x:
+        return None
+    return result.key
 
 
     # DONE Complete the implementation of sum
